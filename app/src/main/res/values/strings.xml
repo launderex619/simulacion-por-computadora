@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Simulaciones</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_linea">Lineas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="line_list">Lista de lineas</string>
+    <string name="line_preview">y = m(x) + b</string>
+    <string name="line_preview_y">y = 0</string>
+    <string name="line_preview_x">x = 0</string>
+    <string name="line_title_dda">Linea DDA</string>
+    <string name="line_title_bressenham">Linea Bressenham</string>
+    <string name="point_list">Lista de puntos</string>
+    <string name="point_preview">0, 0</string>
+    <string name="save">Guardar</string>
+    <string name="load">Cargar</string>
+    <string name="menu_point">Puntos</string>
+    <string name="point_title">Puntos</string>
+    <string name="reset">Reiniciar</string>
+    <string name="write_permission">Se necesita acceso a la escritura en el dispositivo</string>
+    <string name="read_permission">Se necesita acceso a la lectura en el dispositivo</string>
+    <string name="write_permission_granted">Permiso de escritura dado</string>
+    <string name="write_permission_denied">Permiso de escritura denegado</string>
+    <string name="point_list_empty">Lista de puntos vacia</string>
+    <string name="read_permission_granted">Permiso de lectura otorgado</string>
+    <string name="read_permission_denied">Permiso de lectura denegado</string>
+    <string name="ecuation">Ecuacion</string>
+</resources>
