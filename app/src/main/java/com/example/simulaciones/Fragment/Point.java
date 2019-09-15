@@ -66,7 +66,8 @@ public class Point extends Fragment {
         worldPixels = new int[Constants.POINT_HEIGHT_AREA * Constants.POINT_WIDTH_AREA];
         pointList = new ArrayList<>();
         pointListRelative = new ArrayList<>();
-        world = Bitmap.createBitmap(Constants.POINT_WIDTH_AREA, Constants.POINT_HEIGHT_AREA, Bitmap.Config.ARGB_8888);
+        world = Bitmap.createBitmap(Constants.POINT_WIDTH_AREA, Constants.POINT_HEIGHT_AREA,
+                Bitmap.Config.ARGB_8888);
         int c = 0;
         for (int i = 0; i < Constants.POINT_HEIGHT_AREA; i++) {
             for (int j = 0; j < Constants.POINT_WIDTH_AREA; j++) {
@@ -81,7 +82,6 @@ public class Point extends Fragment {
                 c++;
             }
         }
-
     }
 
 
@@ -117,7 +117,8 @@ public class Point extends Fragment {
             for (android.graphics.Point p : pointList) {
                 for (int i = -8; i < 8; i++) {
                     for (int j = -8; j < 8; j++) {
-                        if (p.x + i > 0 && p.y + j > 0 && p.x + i < world.getWidth() && p.y + j < world.getHeight()) {
+                        if (p.x + i > 0 && p.y + j > 0 && p.x + i < world.getWidth() &&
+                                p.y + j < world.getHeight()) {
                             worldMutable.setPixel(p.x + i, p.y + j, Color.GREEN);
                         }
                     }
@@ -233,7 +234,8 @@ public class Point extends Fragment {
                 //agrego el punto a una lista, se agrega con valor global
                 pointList.add(pointList.size(), new android.graphics.Point(localX, localY));
                 if (pointListRelative.size() == 0) {
-                    pointListRelative.add(pointListRelative.size(), new android.graphics.Point(localX, localY));
+                    pointListRelative.add(pointListRelative.size(),
+                            new android.graphics.Point(localX, localY));
                 } else {
                     android.graphics.Point p = pointList.get(pointList.size() - 2);
                     pointListRelative.add(pointListRelative.size(), new android.graphics.Point(

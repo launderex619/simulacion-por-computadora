@@ -39,4 +39,5 @@
     <string name="read_permission_denied">Permiso de lectura denegado</string>
     <string name="ecuation">Ecuacion</string>
     <string name="choose_file">Elige un archivo</string>
+    <string name="line_title_bressenham_dda">DDA vs Bressenham</string>
 </resources>

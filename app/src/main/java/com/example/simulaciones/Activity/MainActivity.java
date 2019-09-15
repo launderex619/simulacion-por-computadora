@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
     private void addTabsForLine() {
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.line_title_dda)));
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.line_title_bressenham)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.line_title_bressenham_dda)));
     }
 
     private void addTabsForPoints() {
