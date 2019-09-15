@@ -3,12 +3,17 @@ package com.example.simulaciones.Fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -29,10 +34,12 @@ import android.widget.Toast;
 import com.example.simulaciones.Helper.Constants;
 import com.example.simulaciones.R;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -105,13 +112,12 @@ public class Point extends Fragment {
     }
 
     private void printPoints() {
-        worldMutable = null;
         worldMutable = world.copy(Bitmap.Config.ARGB_8888, true);
         if (pointList.size() > 0) {
             for (android.graphics.Point p : pointList) {
                 for (int i = -8; i < 8; i++) {
                     for (int j = -8; j < 8; j++) {
-                        if (p.x + i > 0 && p.y + j > 0) {
+                        if (p.x + i > 0 && p.y + j > 0 && p.x + i < world.getWidth() && p.y + j < world.getHeight()) {
                             worldMutable.setPixel(p.x + i, p.y + j, Color.GREEN);
                         }
                     }
@@ -136,6 +142,53 @@ public class Point extends Fragment {
         spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPointList.setAdapter(spnAdapter);
         spnPointList.setOnItemSelectedListener(new ColorPoint());
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent d) {
+        if (requestCode == Constants.REQUEST_FILE_EXTERNAL && resultCode == Activity.RESULT_OK) {
+            Uri fileUri = d.getData();
+            String points = "";
+            String[] pointsXY;
+            btnReset.performClick();
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(fileUri);
+                int data = inputStream.read();
+                while (data != -1) {
+                    points += (char) data;
+                    data = inputStream.read();
+                }
+                pointsXY = points.split("\n");
+                //creacion de la lista de puntos absolutos
+                for (String s : pointsXY) {
+                    String[] temp = s.split(",");
+                    pointList.add(new android.graphics.Point(Integer.parseInt(temp[0]),
+                            Integer.parseInt(temp[1])));
+
+                    //creacion de la lista de puntos relativos
+                    if (pointListRelative.size() == 0) {
+                        pointListRelative.add(pointListRelative.size(), new android.graphics.Point(
+                                Integer.parseInt(temp[0]),
+                                Integer.parseInt(temp[1])));
+                    } else {
+                        android.graphics.Point pR = pointList.get(pointList.size() - 2);
+                        pointListRelative.add(pointListRelative.size(), new android.graphics.Point(
+                                (Math.abs(pR.x) * -1) + Integer.parseInt(temp[0]),
+                                (Math.abs(pR.y) * -1) + Integer.parseInt(temp[1])));
+                    }
+                }
+
+                Toast.makeText(getContext(), "file loaded: " + fileUri.getPath(), Toast.LENGTH_SHORT).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            printPoints();
+            pArea.setImageBitmap(worldMutable);
+            setSpinner();
+        }
     }
 
     private class ColorPoint implements AdapterView.OnItemSelectedListener {
@@ -190,7 +243,6 @@ public class Point extends Fragment {
                 setSpinner();
             }
             printPoints();
-            pArea.setImageBitmap(world);
             return true;
         }
     }
@@ -202,7 +254,7 @@ public class Point extends Fragment {
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                                @NonNull int[] grantResults) {
             // BEGIN_INCLUDE(onRequestPermissionsResult)
-            switch (requestCode){
+            switch (requestCode) {
                 case Constants.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL:
                     if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         // Permission has been granted. Start camera preview Activity.
@@ -232,61 +284,22 @@ public class Point extends Fragment {
                     }
                     break;
             }
-
         }
 
-        private void loadTxtFile() {
-            File file = new File(Environment.getExternalStorageDirectory() + "/" +
-                    File.separator + Constants.pointFileName);
-            String points = "";
-            String[] pointsXY;
-            btnReset.performClick();
 
-            try {
-                if (file.exists()) {
-                    InputStream fo;
-                    fo = new FileInputStream(file);
-                    int data = fo.read();
-                    while(data != -1){
-                        points += (char) data;
-                        data = fo.read();
-                    }
-                    fo.close();
-                    pointsXY = points.split("\n");
-                    //creacion de la lista de puntos absolutos
-                    for(String s: pointsXY){
-                        String[] temp = s.split(",");
-                        pointList.add(new android.graphics.Point(Integer.parseInt(temp[0]),
-                                Integer.parseInt(temp[1])));
-                    }
-                    //creacion de la lista de puntos relativos
-                    for(android.graphics.Point p: pointList) {
-                        if (pointListRelative.size() == 0) {
-                            pointListRelative.add(pointListRelative.size(), new android.graphics.Point(p.x, p.y));
-                        } else {
-                            android.graphics.Point pR = pointList.get(pointList.size() - 2);
-                            pointListRelative.add(pointListRelative.size(), new android.graphics.Point(
-                                    (Math.abs(pR.x) * -1) + p.x,
-                                    (Math.abs(pR.y) * -1) + p.y));
-                        }
-                    }
-                }
-                Toast.makeText(getContext(), "file loaded: " + file, Toast.LENGTH_SHORT).show();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            printPoints();
-            pArea.setImageBitmap(worldMutable);
-            setSpinner();
+        private void loadTxtFile() {
+
+            Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+            chooseFile.setType("*/*");
+            chooseFile = Intent.createChooser(chooseFile, "Choose a file");
+            startActivityForResult(chooseFile, Constants.REQUEST_FILE_EXTERNAL);
+
         }
 
         private void writeTxtFile() {
-            if(pointList.size() == 0){
+            if (pointList.size() == 0) {
                 Toast.makeText(getContext(), getString(R.string.point_list_empty), Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 File file = new File(Environment.getExternalStorageDirectory() + "/" +
                         File.separator + Constants.pointFileName);
                 String points = "";

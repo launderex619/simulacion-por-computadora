@@ -12,4 +12,5 @@ public class Constants {
     public static final int MENU_ITEMS = 2;
     public static final int TABS_FOR_POINT = 1;
     public static final int TABS_FOR_LINE = 2;
+    public static final int REQUEST_FILE_EXTERNAL = 3;
 }

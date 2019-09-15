@@ -110,25 +110,31 @@
                     android:text="@string/line_preview_y"
                     android:textSize="22sp" />
 
-                <TextView
-                    android:id="@+id/text_line_x2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/line_preview_x"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/text_line_y2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/line_preview_y"
-                    android:textSize="22sp" />
-
             </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_line_x2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/line_preview_x"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/text_line_y2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/line_preview_y"
+                android:textSize="22sp" />
+
+        </LinearLayout>
             <Button
                 android:id="@+id/btn_reset"
                 android:layout_width="wrap_content"

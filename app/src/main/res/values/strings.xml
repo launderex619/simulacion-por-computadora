@@ -38,4 +38,5 @@
     <string name="read_permission_granted">Permiso de lectura otorgado</string>
     <string name="read_permission_denied">Permiso de lectura denegado</string>
     <string name="ecuation">Ecuacion</string>
+    <string name="choose_file">Elige un archivo</string>
 </resources>
