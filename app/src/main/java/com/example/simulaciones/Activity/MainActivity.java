@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.widget.Adapter;
 import android.widget.Toast;
 
+import com.example.simulaciones.Adapter.CircleAdapter;
 import com.example.simulaciones.Adapter.LineAdapter;
 import com.example.simulaciones.Adapter.PointAdapter;
 import com.example.simulaciones.Helper.Constants;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     ViewPager viewPager;
     PointAdapter pointAdapter;
     LineAdapter lineAdapter;
+    CircleAdapter circleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         pointAdapter =new PointAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_POINT);
         lineAdapter = new LineAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_LINE);
+        circleAdapter = new CircleAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_CIRCLE);
 /////////////////////////////////////////////
         addTabsForPoints();
         viewPager.setAdapter(pointAdapter);
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity
 
     private void addTabsForPoints() {
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.point_title)));
+    }
+
+    private void addTabsForCircle() {
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.circle_title_dda)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.circle_title_bressenham)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.circle_title_bressenham_dda)));
     }
 
     private void removeTabs() {
@@ -130,6 +139,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         removeTabs();
+        viewPager.removeAllViews();
+        viewPager.removeAllViewsInLayout();
+        Toast.makeText(this, "" +id, Toast.LENGTH_SHORT).show();
         if (id == R.id.nav_point){
             addTabsForPoints();
             viewPager.setAdapter(pointAdapter);
@@ -138,8 +150,9 @@ public class MainActivity extends AppCompatActivity
             addTabsForLine();
             viewPager.setAdapter(lineAdapter);
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_circle) {
+            addTabsForCircle();
+            viewPager.setAdapter(circleAdapter);
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_share) {

@@ -40,4 +40,9 @@
     <string name="ecuation">Ecuacion</string>
     <string name="choose_file">Elige un archivo</string>
     <string name="line_title_bressenham_dda">DDA vs Bressenham</string>
+    <string name="circle_title_dda">DDA</string>
+    <string name="circle_title_bressenham">MidPoint</string>
+    <string name="circle_title_bressenham_dda">DDA vs Midpoint</string>
+    <string name="menu_circle">Circulos</string>
+    <string name="circle_list">Lista de circulos</string>
 </resources>

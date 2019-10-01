@@ -5,17 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.simulaciones.Fragment.Line_DDA_Bressenham;
-import com.example.simulaciones.Fragment.LineBressenham;
-import com.example.simulaciones.Fragment.LineDDA;
+import com.example.simulaciones.Fragment.CircleBressenham;
+import com.example.simulaciones.Fragment.CircleDDA;
+import com.example.simulaciones.Fragment.Circle_DDA_Bressenham;
 import com.example.simulaciones.Helper.Constants;
 
-public class LineAdapter extends FragmentPagerAdapter {
+public class CircleAdapter extends FragmentPagerAdapter {
 
     private Context myContext;
     int totalTabs;
 
-    public LineAdapter(Context context, FragmentManager fm, int tabCount) {
+    public CircleAdapter(Context context, FragmentManager fm, int tabCount) {
         super(fm);
         myContext = context;
         totalTabs = tabCount;
@@ -25,13 +25,13 @@ public class LineAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int pos) {
         switch (pos){
             case Constants.DDA_LINE_FRAGMENT_PAGE:
-                return new LineDDA();
+                return new CircleDDA();
             case Constants.BRESSENHAM_LINE_FRAGMENT_PAGE:
-                return new LineBressenham();
+                return new CircleBressenham();
             case Constants.BRESSENHAM_DDA_LINE_FRAGMENT_PAGE:
-                return new Line_DDA_Bressenham();
+                return new Circle_DDA_Bressenham();
             default:
-                return new LineDDA();
+                return new CircleDDA();
         }
     }
 

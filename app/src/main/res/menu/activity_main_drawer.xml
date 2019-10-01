@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_menu_linea"
             android:title="@string/menu_linea" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_circle"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="@string/menu_circle" />
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"

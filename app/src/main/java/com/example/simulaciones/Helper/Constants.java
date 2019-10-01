@@ -14,5 +14,5 @@ public class Constants {
     public static final int TABS_FOR_POINT = 1;
     public static final int TABS_FOR_LINE = 3;
     public static final int REQUEST_FILE_EXTERNAL = 3;
-
+    public static final int TABS_FOR_CIRCLE = 3;
 }
