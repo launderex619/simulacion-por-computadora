@@ -1,28 +1,23 @@
 package com.example.simulaciones.Activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Adapter;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.simulaciones.Adapter.CircleAdapter;
+import com.example.simulaciones.Adapter.ElipseAdapter;
 import com.example.simulaciones.Adapter.LineAdapter;
 import com.example.simulaciones.Adapter.PointAdapter;
 import com.example.simulaciones.Helper.Constants;
@@ -36,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     PointAdapter pointAdapter;
     LineAdapter lineAdapter;
     CircleAdapter circleAdapter;
+    ElipseAdapter elipseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +43,11 @@ public class MainActivity extends AppCompatActivity
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        pointAdapter =new PointAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_POINT);
+        pointAdapter = new PointAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_POINT);
         lineAdapter = new LineAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_LINE);
         circleAdapter = new CircleAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_CIRCLE);
+        elipseAdapter = new ElipseAdapter(this, getSupportFragmentManager(), 4);
+
 /////////////////////////////////////////////
         addTabsForPoints();
         viewPager.setAdapter(pointAdapter);
@@ -94,8 +92,16 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.circle_title_bressenham_dda)));
     }
 
+    private void addTabsForElipse() {
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_ddaall)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_ddaquadrant)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_midpoint)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_comparator)));
+    }
+
     private void removeTabs() {
-        if (tabLayout.getTabCount() > 0){
+        if (tabLayout.getTabCount() > 0) {
+            viewPager.clearFocus();
             tabLayout.removeAllTabs();
         }
     }
@@ -139,21 +145,31 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         removeTabs();
-        viewPager.removeAllViews();
-        viewPager.removeAllViewsInLayout();
-        Toast.makeText(this, "" +id, Toast.LENGTH_SHORT).show();
-        if (id == R.id.nav_point){
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
+        if (id == R.id.nav_point) {
             addTabsForPoints();
+            pointAdapter = new PointAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_POINT);
             viewPager.setAdapter(pointAdapter);
 
         } else if (id == R.id.nav_linea) {
             addTabsForLine();
+            circleAdapter.clearAll();
+            elipseAdapter.clearAll();
+            lineAdapter = new LineAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_LINE);
             viewPager.setAdapter(lineAdapter);
 
         } else if (id == R.id.nav_circle) {
             addTabsForCircle();
+            elipseAdapter.clearAll();
+            lineAdapter.clearAll();
+            circleAdapter = new CircleAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_CIRCLE);
             viewPager.setAdapter(circleAdapter);
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_elipse) {
+            addTabsForElipse();
+            circleAdapter.clearAll();
+            lineAdapter.clearAll();
+            elipseAdapter = new ElipseAdapter(this, getSupportFragmentManager(), 4);
+            viewPager.setAdapter(elipseAdapter);
 
         } else if (id == R.id.nav_share) {
 

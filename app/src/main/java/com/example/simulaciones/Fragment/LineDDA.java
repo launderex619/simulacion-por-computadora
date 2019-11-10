@@ -1,13 +1,10 @@
 package com.example.simulaciones.Fragment;
 
 import android.annotation.SuppressLint;
-
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,7 +21,6 @@ import android.widget.Toast;
 import com.example.simulaciones.Helper.Constants;
 import com.example.simulaciones.R;
 
-import java.time.Instant;
 import java.util.ArrayList;
 
 public class LineDDA extends Fragment {
@@ -144,24 +140,22 @@ public class LineDDA extends Fragment {
         double m;
         dx = pF.x - pI.x;
         dy = pF.y - pI.y;
-        if(dx == 0){
+        if (dx == 0) {
             m = 1000d;
-        }
-        else {
+        } else {
             m = (double) (dy) / (double) (dx);
         }
         x = pI.x;
         y = pI.y;
 
         if (m <= 1 && m > -1) {
-            if(x > pF.x){
+            if (x > pF.x) {
                 while (x > pF.x) {
                     y = (int) Math.floor((m * (x - pI.x) + pI.y));
                     worldMutable.setPixel(x, y, color);
                     x--;
                 }
-            }
-            else {
+            } else {
                 while (x < pF.x) {
                     y = (int) Math.floor((m * (x - pI.x) + pI.y));
                     worldMutable.setPixel(x, y, color);
@@ -169,14 +163,13 @@ public class LineDDA extends Fragment {
                 }
             }
         } else {
-            if(y > pF.y){
+            if (y > pF.y) {
                 while (y > pF.y) {
                     x = (int) Math.floor((y - pI.y) / m + pI.x);
                     worldMutable.setPixel(x, y, color);
                     y--;
                 }
-            }
-            else {
+            } else {
                 while (y < pF.y) {
                     x = (int) Math.floor((y - pI.y) / m + pI.x);
                     worldMutable.setPixel(x, y, color);

@@ -10,29 +10,38 @@ import com.example.simulaciones.Fragment.LineBressenham;
 import com.example.simulaciones.Fragment.LineDDA;
 import com.example.simulaciones.Helper.Constants;
 
+import java.util.ArrayList;
+
 public class LineAdapter extends FragmentPagerAdapter {
 
+
     private Context myContext;
+    FragmentManager fm;
     int totalTabs;
+    ArrayList<Fragment> fragments;
 
     public LineAdapter(Context context, FragmentManager fm, int tabCount) {
         super(fm);
+        this.fm = fm;
         myContext = context;
         totalTabs = tabCount;
+        fragments = new ArrayList<>();
+        fragments.add(new LineDDA());
+        fragments.add(new LineBressenham());
+        fragments.add(new Line_DDA_Bressenham());
+
+    }
+
+    public void clearAll() //Clear all page
+    {
+        for(int i=0; i<fragments.size(); i++)
+            fm.beginTransaction().remove(fragments.get(i)).commit();
+        fragments.clear();
     }
 
     @Override
     public Fragment getItem(int pos) {
-        switch (pos){
-            case Constants.DDA_LINE_FRAGMENT_PAGE:
-                return new LineDDA();
-            case Constants.BRESSENHAM_LINE_FRAGMENT_PAGE:
-                return new LineBressenham();
-            case Constants.BRESSENHAM_DDA_LINE_FRAGMENT_PAGE:
-                return new Line_DDA_Bressenham();
-            default:
-                return new LineDDA();
-        }
+        return fragments.get(pos);
     }
 
     @Override

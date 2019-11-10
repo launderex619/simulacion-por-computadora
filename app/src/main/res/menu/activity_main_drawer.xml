@@ -17,9 +17,9 @@
             android:icon="@android:drawable/ic_menu_compass"
             android:title="@string/menu_circle" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/nav_elipse"
+            android:icon="@android:drawable/btn_radio"
+            android:title="@string/menu_elipse" />
     </group>
 
     <item android:title="Communicate">

@@ -44,5 +44,10 @@
     <string name="circle_title_bressenham">MidPoint</string>
     <string name="circle_title_bressenham_dda">DDA vs Midpoint</string>
     <string name="menu_circle">Circulos</string>
+    <string name="menu_elipse">Elipse</string>
     <string name="circle_list">Lista de circulos</string>
+    <string name="elipse_title_ddaall">DDA All</string>
+    <string name="elipse_title_ddaquadrant">DDA quadrant</string>
+    <string name="elipse_title_midpoint">MidPoint</string>
+    <string name="elipse_title_comparator">Comparacion</string>
 </resources>
