@@ -50,4 +50,10 @@
     <string name="elipse_title_ddaquadrant">DDA quadrant</string>
     <string name="elipse_title_midpoint">MidPoint</string>
     <string name="elipse_title_comparator">Comparacion</string>
+    <string name="bezier_title_independient">Iterativo</string>
+    <string name="bezier_title_matrix">Matricial</string>
+    <string name="menu_bezier">Bezier</string>
+    <string name="bezier_interpolations">Numero de interpolaciones</string>
+    <string name="bezier_list">Lista de curvas</string>
+    <string name="bezier_k">K:</string>
 </resources>

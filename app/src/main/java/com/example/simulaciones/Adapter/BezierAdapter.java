@@ -5,37 +5,32 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.simulaciones.Fragment.ElipseComparators;
-import com.example.simulaciones.Fragment.ElipseDDAall;
-import com.example.simulaciones.Fragment.ElipseDDAquadrant;
-import com.example.simulaciones.Fragment.ElipseMidPoint;
+import com.example.simulaciones.Fragment.BezierComparator;
+import com.example.simulaciones.Fragment.BezierIndependient;
+import com.example.simulaciones.Fragment.BezierMatrix;
 
 import java.util.ArrayList;
 
-public class ElipseAdapter extends FragmentPagerAdapter {
-
-
+public class BezierAdapter extends FragmentPagerAdapter {
     private Context myContext;
     FragmentManager fm;
     int totalTabs;
     ArrayList<Fragment> fragments;
 
-    public ElipseAdapter(Context context, FragmentManager fm, int tabCount) {
+    public BezierAdapter(Context context, FragmentManager fm, int tabCount) {
         super(fm);
         this.fm = fm;
         myContext = context;
         totalTabs = tabCount;
         fragments = new ArrayList<>();
-        fragments.add(new ElipseDDAall());
-        fragments.add(new ElipseDDAquadrant());
-        fragments.add(new ElipseMidPoint());
-        fragments.add(new ElipseComparators());
-
+        fragments.add(new BezierIndependient());
+        fragments.add(new BezierMatrix());
+        fragments.add(new BezierComparator());
     }
 
     public void clearAll() //Clear all page
     {
-        for (int i = 0; i < fragments.size(); i++)
+        for(int i=0; i<fragments.size(); i++)
             fm.beginTransaction().remove(fragments.get(i)).commit();
         fragments.clear();
     }
@@ -50,3 +45,5 @@ public class ElipseAdapter extends FragmentPagerAdapter {
         return totalTabs;
     }
 }
+
+

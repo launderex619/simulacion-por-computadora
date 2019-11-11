@@ -20,6 +20,10 @@
             android:id="@+id/nav_elipse"
             android:icon="@android:drawable/btn_radio"
             android:title="@string/menu_elipse" />
+        <item
+            android:id="@+id/nav_bezier"
+            android:icon="@android:drawable/ic_menu_share"
+            android:title="@string/menu_bezier" />
     </group>
 
     <item android:title="Communicate">

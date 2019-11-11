@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.simulaciones.Adapter.BezierAdapter;
 import com.example.simulaciones.Adapter.CircleAdapter;
 import com.example.simulaciones.Adapter.ElipseAdapter;
 import com.example.simulaciones.Adapter.LineAdapter;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     LineAdapter lineAdapter;
     CircleAdapter circleAdapter;
     ElipseAdapter elipseAdapter;
+    BezierAdapter bezierAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         lineAdapter = new LineAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_LINE);
         circleAdapter = new CircleAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_CIRCLE);
         elipseAdapter = new ElipseAdapter(this, getSupportFragmentManager(), 4);
-
+        bezierAdapter = new BezierAdapter(this, getSupportFragmentManager(), 3);
 /////////////////////////////////////////////
         addTabsForPoints();
         viewPager.setAdapter(pointAdapter);
@@ -97,6 +99,10 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_ddaquadrant)));
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_midpoint)));
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.elipse_title_comparator)));
+    }
+    private void addTabsForBezier() {
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.bezier_title_independient)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.bezier_title_matrix)));
     }
 
     private void removeTabs() {
@@ -154,6 +160,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_linea) {
             addTabsForLine();
             circleAdapter.clearAll();
+            bezierAdapter.clearAll();
             elipseAdapter.clearAll();
             lineAdapter = new LineAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_LINE);
             viewPager.setAdapter(lineAdapter);
@@ -162,16 +169,26 @@ public class MainActivity extends AppCompatActivity
             addTabsForCircle();
             elipseAdapter.clearAll();
             lineAdapter.clearAll();
+            bezierAdapter.clearAll();
             circleAdapter = new CircleAdapter(this, getSupportFragmentManager(), Constants.TABS_FOR_CIRCLE);
             viewPager.setAdapter(circleAdapter);
         } else if (id == R.id.nav_elipse) {
             addTabsForElipse();
             circleAdapter.clearAll();
             lineAdapter.clearAll();
+            bezierAdapter.clearAll();
             elipseAdapter = new ElipseAdapter(this, getSupportFragmentManager(), 4);
             viewPager.setAdapter(elipseAdapter);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_bezier) {
+            addTabsForBezier();
+            circleAdapter.clearAll();
+            elipseAdapter.clearAll();
+            lineAdapter.clearAll();
+            bezierAdapter = new BezierAdapter(this, getSupportFragmentManager(), 3);
+            viewPager.setAdapter(bezierAdapter);
+
+        }else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
