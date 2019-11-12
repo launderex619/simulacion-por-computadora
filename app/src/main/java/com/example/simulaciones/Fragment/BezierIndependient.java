@@ -41,9 +41,9 @@ public class BezierIndependient extends Fragment {
     private Points curves;
     private ImageView pArea;
     private View view;
-    private Spinner spnEcuationList, spnInterpolations;
+    private Spinner spnInterpolations;
     private SeekBar skbK;
-    private TextView txtX1, txtY1, txtX2, txtY2, txtR, txtK;
+    private TextView txtK;
     private Button btnReset;
     private Bitmap world, worldMutable;
     private int[] worldPixels;
@@ -79,13 +79,7 @@ public class BezierIndependient extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_bezier_independient, container, false);
-        spnEcuationList = view.findViewById(R.id.spinner_bezier_list);
-        txtX1 = view.findViewById(R.id.text_bezier_x1);
-        txtY1 = view.findViewById(R.id.text_bezier_y1);
-        txtX2 = view.findViewById(R.id.text_bezier_x2);
-        txtY2 = view.findViewById(R.id.text_bezier_y2);
         txtK = view.findViewById(R.id.bezier_k);
-        txtR = view.findViewById(R.id.txt_r_bezier);
         btnReset = view.findViewById(R.id.btn_reset);
         spnInterpolations = view.findViewById(R.id.spinner_bezier_interpolations);
         skbK =  view.findViewById(R.id.bezier_seek_k);
@@ -108,11 +102,6 @@ public class BezierIndependient extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "pressed", Toast.LENGTH_SHORT).show();
-                txtX1.setText("");
-                txtX2.setText("");
-                txtY1.setText("");
-                txtY2.setText("");
-                txtR.setText("");
                 touchCounter = 0;
                 worldMutable = world.copy(Bitmap.Config.ARGB_8888, true);
                 pArea.setImageBitmap(worldMutable);
@@ -153,7 +142,6 @@ public class BezierIndependient extends Fragment {
 
 
     private void drawLine(Point pI, Point pF, int color, Bitmap bitmap) {
-
         int dy, dx, incYi, incXi, incXr, incYr, temp, x, y, avR, av, avI;
         dy = (pF.y - pI.y);
         dx = (pF.x - pI.x);

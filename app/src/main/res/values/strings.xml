@@ -55,5 +55,5 @@
     <string name="menu_bezier">Bezier</string>
     <string name="bezier_interpolations">Numero de interpolaciones</string>
     <string name="bezier_list">Lista de curvas</string>
-    <string name="bezier_k">K:</string>
+    <string name="bezier_k">K: 1/1000</string>
 </resources>
