@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity
     private void addTabsForBezier() {
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.bezier_title_independient)));
         tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.bezier_title_matrix)));
+        tabLayout.addTab(tabLayout.newTab().setText(getText(R.string.bezier_title_comparator)));
     }
 
     private void removeTabs() {

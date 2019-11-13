@@ -56,4 +56,5 @@
     <string name="bezier_interpolations">Numero de interpolaciones</string>
     <string name="bezier_list">Lista de curvas</string>
     <string name="bezier_k">K: 1/1000</string>
+    <string name="bezier_title_comparator">Matriz vs Iterativo</string>
 </resources>

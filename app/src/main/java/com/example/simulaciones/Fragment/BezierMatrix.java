@@ -38,9 +38,8 @@ import static java.lang.Thread.sleep;
  */
 public class BezierMatrix extends Fragment {
 
-
     private float scaledProportionX, scaledProportionY;
-    private Points curves;
+    private BezierMatrix.Points curves;
     private ImageView pArea;
     private View view;
     private Spinner spnInterpolations;
@@ -80,7 +79,7 @@ public class BezierMatrix extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_bezier_independient, container, false);
+        view = inflater.inflate(R.layout.fragment_bezier_matrix, container, false);
         txtK = view.findViewById(R.id.bezier_k);
         btnReset = view.findViewById(R.id.btn_reset);
         spnInterpolations = view.findViewById(R.id.spinner_bezier_interpolations);
@@ -143,7 +142,7 @@ public class BezierMatrix extends Fragment {
     }
 
 
-    private void drawLine(Point pI, Point pF, int color, Bitmap bitmap) {
+    private void drawLine(android.graphics.Point pI, android.graphics.Point pF, int color, Bitmap bitmap) {
         int dy, dx, incYi, incXi, incXr, incYr, temp, x, y, avR, av, avI;
         dy = (pF.y - pI.y);
         dx = (pF.x - pI.x);
@@ -206,11 +205,11 @@ public class BezierMatrix extends Fragment {
         }
         pArea.setImageBitmap(worldMutable);
         if(curves.getGrade() == 2)
-            (new DrawerGrade2()).execute(curves.getLines());
+            (new BezierMatrix.DrawerGrade2()).execute(curves.getLines());
         else if (curves.getGrade() == 3)
-            (new DrawerGrade3()).execute(curves.getLines());
+            (new BezierMatrix.DrawerGrade3()).execute(curves.getLines());
         else if (curves.getGrade() == 4)
-            (new DrawerGrade4()).execute(curves.getLines());
+            (new BezierMatrix.DrawerGrade4()).execute(curves.getLines());
     }
 
 
@@ -235,7 +234,7 @@ public class BezierMatrix extends Fragment {
                 localY = Math.round(event.getY() * scaledProportionY);
                 touchCounter++;
                 if (firtsTouch){
-                    curves = new Points(curveGrade);
+                    curves = new BezierMatrix.Points(curveGrade);
                     firtsTouch = false;
                     resetCanvas();
                 }
@@ -293,7 +292,7 @@ public class BezierMatrix extends Fragment {
         }
     }
 
-    private class DrawerGrade2 extends AsyncTask<ArrayList<Point>, Bitmap, Void >{
+    private class DrawerGrade2 extends AsyncTask<ArrayList<Point>, Bitmap, Void > {
         SimpleMatrix values = new SimpleMatrix(3,3,true, new double[] {1d,-2d,1d,-2d,2d,0d,1d,0d,0d});
         @Override
         protected Void doInBackground(ArrayList<Point>... arrayLists) {
