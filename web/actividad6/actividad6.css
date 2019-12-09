@@ -1,0 +1,25 @@
+label, output, input {
+  color: white;
+}
+
+div {
+  margin-right: 20px;
+}
+
+.custom-range {
+  margin-left: 20px;
+}
+
+.unflex {
+  display: block;
+}
+
+.flex {
+  display: flex;
+    justify-content: left !important;
+}
+
+
+#divRotar, #divPorcentaje, #divReflejo, #divTranslado{
+  display: none;
+}

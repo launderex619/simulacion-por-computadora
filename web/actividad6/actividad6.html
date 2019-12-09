@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	 crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	 crossorigin="anonymous">
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	 crossorigin="anonymous">
+
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	 crossorigin="anonymous">
+
+	</script>
+	<link rel="stylesheet" type="text/css" href="actividad6.css">
+</head>
+
+<body>
+	<nav id="toolbar" class="navbar navbar-dark bg-dark">
+		<form class="form-inline my-2 my-lg-0">
+			<div class="unflex">
+				<div class="flex custom-control custom-switch">
+					<input type="checkbox" onclick="showHide('divRotar'); update();" class="custom-control-input" id="rotar">
+          <label class="custom-control-label" for="rotar">Rotar</label>
+          <div id="divRotar" class="form-check-inline">
+            <input name="inGrados" type="range" class="custom-range" min="0" max="360" step="1" id="grados" oninput="outGrados.value = inGrados.valueAsNumber + '°'; rotacion=inGrados.valueAsNumber; girar();">
+            <output name="outGrados" for="grados">100°</label>
+          </div>
+        </div>
+				<div class="flex custom-control custom-switch">
+          <input type="checkbox" onclick="showHide('divPorcentaje'); update();" class="custom-control-input" id="escalar">
+          <label class="custom-control-label" for="escalar">Escalar</label>
+          <div id="divPorcentaje" class="form-check-inline">
+            <input name="inPorcentaje" type="range" class="custom-range" min="0" max="500" step="1" id="porcentaje" oninput="outPorcentaje.value = inPorcentaje.valueAsNumber + '%'; escala=inPorcentaje.valueAsNumber; proporcion();">
+            <output name="outPorcentaje" for="porcentaje">50%</label>
+          </div>
+        </div>
+				<div class="flex custom-control custom-switch">
+          <input type="checkbox" onclick="showHide('divReflejo'); update();" class="custom-control-input" id="reflejar">
+          <label class="custom-control-label" for="reflejar">Reflejar</label>
+          <div id="divReflejo" class="form-check-inline">
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="refX" name="reflex" onclick="reflexion = true; update();">
+              <label class="form-check-label" for="refX">X</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="refY" name="reflex" onclick="reflexion = false; update();">
+              <label class="form-check-label" for="refY">Y</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex custom-control custom-switch">
+        <input type="checkbox" onclick="showHide('divTranslado'); update();" class="custom-control-input" id="transladar">
+        <label class="custom-control-label" for="transladar">Transladar</label>
+        <div id="divTranslado" class="form-check-inline">
+          <input id="tX" class="form-control" type="number" placeholder="translado en -X+">
+          <input id="tY" class="form-control" type="number" placeholder="translado en -Y+">
+          <div class="btn btn-primary" onclick="transladar(tX.valueAsNumber, tY.valueAsNumber);">transladar</div>
+        </div>
+      <div class="btn btn-primary" onclick="animation();">Animar</div>
+      <div class="btn btn-primary" onclick="resetAll();">Reiniciar</div>
+      </div>
+    </form>
+	</nav>
+  <canvas class="myCanvas" onclick="drawCircle(event)"></canvas>
+
+  <script src="controller.js"></script>
+  <script src="actividad6.js"></script>
+</body>
+
+</html>
